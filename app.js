@@ -1,5 +1,5 @@
 const apiInstance = axios.create({
-  baseURL: "https://553e8448.ngrok.io",
+  baseURL: "your_server_url",
   headers: { "Content-Type": "application/json" }
 });
 

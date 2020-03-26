@@ -1,25 +1,26 @@
 const cors = require("cors");
 var corsOptions = {
-  origin: 'https://webhook-webinar.firebaseapp.com',
+  origin: 'your_configuration_page_url',
 }
 const express = require("express");
 const bodyParser = require("body-parser");
 const axios = require("axios");
 const app = express().use(bodyParser.json()); // creates http server
 const secret_key = "token"; // webhooks secret key
+const server_url = "your_server_url" // url for webhooks
 
 // Client ID, Secret and RedirectURI from Developer Console app:
 // https://developers.livechatinc.com/console/apps/
-const client_id = "76256eb70cb0609774983a5aef221d80";
-const client_secret = "baf0d9accd899f0e66eb03796c53fdfc";
-const redirect_uri = "https://webhook-webinar.firebaseapp.com/";
+const client_id = "your_app_client_id";
+const client_secret = "your_app_client_secret";
+const redirect_uri = "your_app_client_secret";
 
 // Story ID from URL: https://app.chatbot.com/stories/5de66551341e2d000799a070
-const storyId = "5de66551341e2d000799a070";
+const storyId = "your__chatbot_story_id";
 
 // Client access token from: https://app.chatbot.com/settings/developers
 const cbToken =
-  "Bearer 58acb6f78677797258c5a6eaaaa3f528685311f40d446f3c7184d650f35b04f2";
+  "Bearer 5XXXXXXXXXXXX_your_chatbot_client_access_token";
 
 // Globals
 // TODO: Move to DB
@@ -122,7 +123,7 @@ app.post("/bot_create", async (req, res) => {
       status: "accepting chats",
       avatar: "https://cdn.iconscout.com/icon/free/png-256/bot-136-504893.png",
       webhooks: {
-        url: "https://553e8448.ngrok.io",
+        url: server_url,
         actions: [
           {
             name: "incoming_event",
