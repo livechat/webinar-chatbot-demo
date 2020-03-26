@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8" />
+    <title>Configuration page</title>
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600"
+      media="all"
+    />
+
+    <!-- Axios library for API calls -->
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <!-- Sign in with LiveChat SDK-->
+    <script src="https://cdn.livechatinc.com/accounts/accounts-sdk.min.js"></script>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+
+  <body>
+    <div class="grid-container">
+      <div class="livechat-authorization">
+        <div class="lc-form-group__label authorization">
+          Use the button below to send the authorization code
+        </div>
+        <!-- Sign in with LiveChat Button -->
+        <a href="" onclick="instance.openPopup()">
+          <div id="livechat-login-button" class="livechat-login-button"></div>
+        </a>
+        <div class="lc-divider" />
+      </div>
+
+      <div class="livechat-authorization-done">
+        <form id="livechat-authorization-done" style="display:none;">
+          <div
+            class="lc-form-group__label authorization authorization-done"
+          ></div>
+        </form>
+        <div class="lc-divider" />
+      </div>
+
+      <div class="livechat-list-of-bots">
+        <div class="lc-form-group__label">
+          Use the button below to get list of bots
+        </div>
+        <button
+          type="button"
+          class="lc-btn lc-btn--primary"
+          onclick="botList()"
+        >
+          Get bot list
+        </button>
+        <div class="lc-divider" />
+        <div id="bot_list" class="lc-card__text">List of bots</div>
+        <div>
+          <div class="container">
+            <ul class="bot-list" title="List of bots"></ul>
+          </div>
+        </div>
+        <div class="lc-divider" />
+      </div>
+
+      <div class="livechat-create-bot">
+        <div class="lc-form-group__label">Create new bot</div>
+        <input
+          type="text"
+          class="lc-input"
+          value=""
+          name="BotName"
+          required=""
+          placeholder="Bot Name..."
+        />
+        <button
+          type="button"
+          class="lc-btn lc-btn--primary"
+          onclick="botCreate()"
+        >
+          Create new bot
+        </button>
+        <div class="lc-divider" />
+      </div>
+    </div>
+
+    <script>
+      // Obtaining data about authorized user
+      const instance = AccountsSDK.init({
+        client_id: "76256eb70cb0609774983a5aef221d80",
+        response_type: "code",
+        onIdentityFetched: (error, data) => {
+          if (data) {
+            console.log(data);
+            console.log("User authorized!");
+            console.log("License number: " + data.license);
+            console.log(error);
+            authSend(data);
+          }
+        }
+      });
+    </script>
+
+    <script src="app.js"></script>
+  </body>
+</html>
